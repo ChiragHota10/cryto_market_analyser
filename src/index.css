@@ -1,0 +1,202 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 93%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 60 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 174 100% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 350 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 0%;
+    --input: 0 0% 80%;
+    --ring: 0 0% 0%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;  /* Pure black background */
+    --foreground: 0 0% 100%;  /* White text */
+
+    --card: 0 0% 5%;  /* Nearly black card background */
+    --card-foreground: 0 0% 100%;  /* White text on cards */
+
+    --popover: 0 0% 5%;  /* Nearly black popover background */
+    --popover-foreground: 0 0% 100%;  /* White text on popovers */
+
+    --primary: 0 0% 100%;  /* White primary color */
+    --primary-foreground: 0 0% 0%;  /* Black text on primary elements */
+
+    --secondary: 60 100% 50%;  /* Bright yellow (FFFF00) */
+    --secondary-foreground: 0 0% 0%;  /* Black text on secondary elements */
+
+    --muted: 0 0% 15%;  /* Dark gray muted background */
+    --muted-foreground: 0 0% 65%;  /* Light gray muted text */
+
+    --accent: 323 100% 50%;  /* Bright pink accent */
+    --accent-foreground: 0 0% 100%;  /* White text on accent */
+
+    --destructive: 0 100% 60%;  /* Brighter red for better visibility on dark */
+    --destructive-foreground: 0 0% 100%;  /* White text on destructive */
+
+    --border: 0 0% 20%;  /* Dark gray border */
+    --input: 0 0% 20%;  /* Dark gray input background */
+    --ring: 0 0% 80%;  /* Light gray ring */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  /* Extra small screens */
+  @variants responsive {
+    .xs\:w-32 {
+      width: 8rem;
+    }
+    .xs\:ml-2 {
+      margin-left: 0.5rem;
+    }
+    .xs\:text-sm {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+}
+
+@layer components {
+  .neo-brutalist-card {
+    @apply bg-white dark:bg-black border-2 border-black shadow-brutal transition-all 
+    hover:shadow-brutal-lg hover:-translate-y-1 hover:-translate-x-1;
+  }
+  
+  .neo-brutalist-button {
+    @apply bg-neobrutalism-yellow dark:bg-neobrutalism-yellow border-2 border-black shadow-brutal 
+    font-bold transition-all hover:shadow-brutal-lg hover:-translate-y-1 
+    hover:-translate-x-1 active:shadow-none active:translate-y-0 
+    active:translate-x-0 text-black;
+  }
+  
+  .neo-brutalist-input {
+    @apply bg-white dark:bg-black border-2 border-black shadow-brutal p-2 focus:outline-none
+    focus:ring-2 focus:ring-neobrutalism-yellow;
+  }
+
+  .stats-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4 my-4;
+  }
+  
+  .stat-card {
+    @apply neo-brutalist-card p-4 flex flex-col;
+  }
+  
+  .stat-title {
+    @apply text-xs uppercase font-bold text-muted-foreground;
+  }
+  
+  .stat-value {
+    @apply text-2xl font-bold;
+  }
+  
+  .percent-change {
+    @apply text-sm font-mono;
+  }
+  
+  .percent-positive {
+    @apply text-green-600 dark:text-green-400 font-bold;
+  }
+  
+  .percent-negative {
+    @apply text-red-600 dark:text-red-400 font-bold;
+  }
+  
+  /* Sidebar Animation */
+  .sidebar-enter {
+    @apply transform -translate-x-full;
+  }
+  
+  .sidebar-enter-active {
+    @apply transform translate-x-0 transition-transform duration-300 ease-in-out;
+  }
+  
+  .sidebar-exit {
+    @apply transform translate-x-0;
+  }
+  
+  .sidebar-exit-active {
+    @apply transform -translate-x-full transition-transform duration-300 ease-in-out;
+  }
+}
+
+/* Dark Mode Specific Adjustments */
+.dark .neo-brutalist-card {
+  @apply bg-black text-white border-2 border-white;
+}
+
+.dark .neo-brutalist-button {
+  @apply text-black border-2 border-white/90;
+}
+
+.dark .bg-neobrutalism-gray {
+  @apply bg-zinc-800 text-white;
+}
+
+/* Animation for hamburger menu button */
+@keyframes button-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.animate-button-press {
+  animation: button-press 0.3s ease;
+}
+
+/* Ad banner animation */
+@keyframes ad-fade-in {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ad-fade-out {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+/* Sidebar transition animation */
+.sidebar-transition {
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.content-transition {
+  transition: margin-left 0.3s ease-in-out;
+}
